@@ -67,11 +67,6 @@ int main()
 			float ig = int(kMultiplier*col.g());
 			float ib = int(kMultiplier*col.b());
 
-			//(pixels[j][i])[0] = ir;
-			//(pixels[j][i])[1] = ig;
-			//(pixels[j][i])[2] = ib;
-			//(pixels[j][i])[3] = 1;
-
 			pixels[idx][0] = ir;
 			pixels[idx][1] = ig;
 			pixels[idx][2] = ib;
