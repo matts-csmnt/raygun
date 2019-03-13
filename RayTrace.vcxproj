@@ -115,9 +115,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="rayg_sphere.h" />
     <ClInclude Include="Libraries\stb\stb_image.h" />
     <ClInclude Include="Libraries\stb\stb_image_write.h" />
     <ClInclude Include="rayg_ray.h" />
+    <ClInclude Include="rayg_surface.h" />
     <ClInclude Include="rayg_vec3.h" />
   </ItemGroup>
   <ItemGroup>

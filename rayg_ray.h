@@ -6,16 +6,16 @@
 
 namespace ray_g {
 
-	class ray {
+	class Ray {
 	public:
-		ray() {};
-		ray(const vec3& a, const vec3& b) { A = a; B = b; };
+		Ray() {};
+		Ray(const Vec3& a, const Vec3& b) { A = a; B = b; };
 
-		vec3 origin() const { return A; };
-		vec3 direction() const { return B; };
-		vec3 point_at_param(float t) const { return A + B; };
+		Vec3 origin() const { return A; };
+		Vec3 direction() const { return B; };
+		Vec3 point_at_param(float t) const { return A + B; };
 
-		vec3 A;	//Origin
-		vec3 B;	//Direction
+		Vec3 A;	//Origin
+		Vec3 B;	//Direction
 	};
 }
