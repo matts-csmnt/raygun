@@ -2,6 +2,9 @@
 #include "rayg_ray.h"
 #include "rayg_surface.h"
 #include "rayg_sphere.h"
+#include "rayg_camera.h"
+
+#include <random>
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #define STBI_MSC_SECURE_CRT
@@ -10,6 +13,7 @@
 constexpr float kMultiplier = 255.99f;
 constexpr int k_px_width = 512;
 constexpr int k_px_height = 512;
+constexpr int k_num_aa_samples = 100;
 using RGBA_Channels = unsigned char[3];
 
 using namespace ray_g;
@@ -32,6 +36,10 @@ Vec3 colour(const Ray& r, const SurfaceList& world)
 
 int main()
 {
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_real_distribution<> dis(0, 1);
+
 	RGBA_Channels* pixels = new RGBA_Channels[k_px_width*k_px_height];
 
 	//image bounds
@@ -45,17 +53,27 @@ int main()
 	objects.append(new Sphere(Vec3(0, 0, -1), 0.5));
 	objects.append(new Sphere(Vec3(0, -100.5, -1), 100));
 
+	//Camera
+	Camera cam(k_px_width, k_px_height);
+
 	for (int j(0); j < k_px_height; j++)
 	{
 		for (int i(0); i < k_px_width; i++)
 		{
 			int idx((j*k_px_width) + i);
+			Vec3 col(0, 0, 0);
 
-			float u = float(i) / float(k_px_width);
-			float v = float(j) / float(k_px_height);
+			//AA Samples
+			for (int s(0); s < k_num_aa_samples; ++s)
+			{
+				float u = float(i + dis(gen)) / float(k_px_width);
+				float v = float(j + dis(gen)) / float(k_px_height);
 
-			Ray r(origin, lowerLeftCrnr + u * horizontalUnits + v * verticalUnits);
-			Vec3 col(colour(r, objects));
+				Ray r = cam.getRay(u, v);
+				col += colour(r, objects);
+			}
+
+			col /= k_num_aa_samples;
 
 			float ir = int(kMultiplier*col.r());
 			float ig = int(kMultiplier*col.g());
