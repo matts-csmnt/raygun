@@ -9,15 +9,18 @@ namespace ray_g {
 	class Sphere : public Surface {
 	public:
 		Sphere() {};
-		Sphere(const Vec3& center, float radius) : m_center(center), m_radius(radius) {};
+		Sphere(const Vec3& center, float radius, Material* mat) : m_center(center), m_radius(radius), m_material(mat) {};
 		virtual bool hit(const Ray& r, float t_min, float t_max, hit_data& data) const;
 
 		const Vec3& getCenter() { return m_center; };
 		const float getRadius() { return m_radius; };
 
+		void freeMat() { if (m_material) { delete m_material; m_material = nullptr; } }
+
 	private:
 		Vec3 m_center;
 		float m_radius;
+		Material* m_material = nullptr;
 	};
 
 	bool Sphere::hit(const Ray& r, float t_min, float t_max, hit_data& data) const
@@ -30,24 +33,28 @@ namespace ray_g {
 
 		if (discriminant > 0)
 		{
-			float tmp = (-b - sqrt(discriminant)) / a;
+			float dRoot = sqrt(discriminant);
+
+			float tmp = (-b - dRoot) / a;
 			if (tmp < t_max && tmp > t_min)
 			{
 				//we hit and return info
 				data.t = tmp;
-				data.p = r.point_at_param(tmp);
-				data.normal = unit_vector(data.p - m_center);	// / m_radius;
+				data.p = r.point_at_param(data.t);
+				data.normal = (data.p - m_center) / m_radius;
+				data.mat = m_material;
 				return true;
 			}
 
 			//retest
-			tmp = (-b + sqrt(discriminant)) / a;
+			tmp = (-b + dRoot) / a;
 			if (tmp < t_max && tmp > t_min)
 			{
 				//we hit and return info
 				data.t = tmp;
-				data.p = r.point_at_param(tmp);
-				data.normal = unit_vector(data.p - m_center);	// / m_radius;
+				data.p = r.point_at_param(data.t);
+				data.normal = (data.p - m_center) / m_radius;
+				data.mat = m_material;
 				return true;
 			}
 		}

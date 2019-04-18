@@ -37,3 +37,4 @@
 # Debug etc.
 /.vs
 /Debug
+x64/

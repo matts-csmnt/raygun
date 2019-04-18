@@ -3,55 +3,64 @@
 #include "rayg_surface.h"
 #include "rayg_sphere.h"
 #include "rayg_camera.h"
-
-#include <random>
+#include "rayg_material.h"
+#include "randf.h"
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #define STBI_MSC_SECURE_CRT
 #include "Libraries/stb/stb_image_write.h"
 
-constexpr float kMultiplier = 255.99f;
-constexpr int k_px_width = 512;
-constexpr int k_px_height = 512;
-constexpr int k_num_aa_samples = 100;
+constexpr double kMultiplier = 255.99;
+constexpr int k_px_width = 300;
+constexpr int k_px_height = 150;
+constexpr int k_num_aa_samples = 10;
 using RGBA_Channels = unsigned char[3];
 
 using namespace ray_g;
 
-Vec3 colour(const Ray& r, const SurfaceList& world)
+Vec3 colour(const Ray& r, Surface* world, int depth)
 {
 	hit_data data;
 
-	if (world.hit(r, 0.0, FLT_MAX, data))
+	if (world->hit(r, 0.001, FLT_MAX, data))
 	{
-		return data.normal * 0.5f + 0.5f;
+		Ray scattered;
+		Vec3 attenuation;
+		if (depth < 50 && data.mat->scatter(r, data, attenuation, scattered))
+		{
+			Vec3 col = colour(scattered, world, depth + 1);
+			return attenuation * col;
+		}
+		else
+		{
+			return Vec3(0, 0, 0);
+		}
 	}
 	else
 	{
 		Vec3 unit_dir = unit_vector(r.direction());
-		float t = 0.5f * (unit_dir.y() + 1.0f);
-		return (1.0f - t) * Vec3(1.0f, 1.0f, 1.0f) + t * Vec3(0.5f, 0.7f, 1.0f);
+		float t = 0.5 * (unit_dir.y() + 1.0);
+		return (1.0 - t) * Vec3(1.0, 1.0, 1.0) + t * Vec3(0.5, 0.7, 1.0);
 	}
 }
 
 int main()
 {
-	std::random_device rd;
-	std::mt19937 gen(rd());
-	std::uniform_real_distribution<> dis(0, 1);
-
 	RGBA_Channels* pixels = new RGBA_Channels[k_px_width*k_px_height];
 
 	//image bounds
-	Vec3 lowerLeftCrnr(-(float)k_px_width / 100, -(float)k_px_height / 100, -1.0f);
-	Vec3 horizontalUnits(((float)k_px_width / 100) * 2, 0.0f, 0.0f);
+	Vec3 lowerLeftCrnr(-(float)k_px_width / 100, -(float)k_px_height / 100, -1.0);
+	Vec3 horizontalUnits(((float)k_px_width / 100) * 2, 0.0f, 0.0);
 	Vec3 verticalUnits(0.0f, ((float)k_px_height / 100) * 2, 0.0f);
 	Vec3 origin(0.0f, 0.0f, 0.0f);
 
 	//World List
-	SurfaceList objects;
-	objects.append(new Sphere(Vec3(0, 0, -1), 0.5));
-	objects.append(new Sphere(Vec3(0, -100.5, -1), 100));
+	Surface* objects[4];
+	objects[0] = new Sphere(Vec3(0, 0, -1),			0.5, new Lambertian(Vec3(0.8,0.3,0.3)));
+	objects[1] = new Sphere(Vec3(0, -100.5, -1),	100, new Lambertian(Vec3(0.8, 0.8, 0.0)));
+	objects[2] = new Sphere(Vec3(1, 0, -1),			0.5, new Metal(Vec3(0.8, 0.6, 0.2)));
+	objects[3] = new Sphere(Vec3(-1, 0, -1),		0.5, new Metal(Vec3(0.8, 0.8, 0.8)));
+	Surface* world = new SurfaceList(objects, 4);
 
 	//Camera
 	Camera cam(k_px_width, k_px_height);
@@ -66,18 +75,21 @@ int main()
 			//AA Samples
 			for (int s(0); s < k_num_aa_samples; ++s)
 			{
-				float u = float(i + dis(gen)) / float(k_px_width);
-				float v = float(j + dis(gen)) / float(k_px_height);
+				float u = float(i + randf()) / float(k_px_width);
+				float v = float(j + randf()) / float(k_px_height);
 
 				Ray r = cam.getRay(u, v);
-				col += colour(r, objects);
+				col += colour(r, world, 0);
 			}
 
 			col /= k_num_aa_samples;
 
-			float ir = int(kMultiplier*col.r());
-			float ig = int(kMultiplier*col.g());
-			float ib = int(kMultiplier*col.b());
+			//gamma correct
+			col = Vec3(sqrt(col[0]), sqrt(col[1]), sqrt(col[2]));
+
+			int ir = int(kMultiplier*col.r());
+			int ig = int(kMultiplier*col.g());
+			int ib = int(kMultiplier*col.b());
 
 			pixels[idx][0] = ir;
 			pixels[idx][1] = ig;
@@ -92,9 +104,12 @@ int main()
 
 	if (pixels)
 	{
-		delete pixels;
+		delete[] pixels;
 		pixels = nullptr;
 	}
 
+	delete[] world;
+	//reinterpret_cast<SurfaceList*>(world)->free();
+	
 	return 0;
 }

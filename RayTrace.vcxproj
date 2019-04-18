@@ -115,7 +115,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="randf.h" />
     <ClInclude Include="rayg_camera.h" />
+    <ClInclude Include="rayg_material.h" />
     <ClInclude Include="rayg_sphere.h" />
     <ClInclude Include="Libraries\stb\stb_image.h" />
     <ClInclude Include="Libraries\stb\stb_image_write.h" />

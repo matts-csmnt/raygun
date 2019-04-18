@@ -19,6 +19,9 @@
     <Filter Include="Header Files\Surface Objects">
       <UniqueIdentifier>{8354c6c1-2249-41c2-a6e1-7790569d9e97}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Materials">
+      <UniqueIdentifier>{520e77a1-5d35-4323-a8cc-f6c8003f30d3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Libraries\stb\stb_image.h">
@@ -36,11 +39,17 @@
     <ClInclude Include="rayg_sphere.h">
       <Filter>Header Files\Surface Objects</Filter>
     </ClInclude>
-    <ClInclude Include="rayg_surface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="rayg_camera.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="randf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rayg_material.h">
+      <Filter>Header Files\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="rayg_surface.h">
+      <Filter>Header Files\Surface Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

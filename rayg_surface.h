@@ -10,10 +10,13 @@
 
 namespace ray_g {
 
+	class Material;	//fwd ref the mat
+
 	struct hit_data {
 		float t;
 		Vec3 p;
 		Vec3 normal;
+		Material* mat;
 	};
 
 	class Surface {
@@ -23,62 +26,45 @@ namespace ray_g {
 	};
 
 	//--
-
-	class SurfaceList : public Surface
-	{
+	class SurfaceList : public Surface {
 	public:
-		SurfaceList() {};
-		~SurfaceList();
-
-		virtual bool hit(const Ray& r, float t_min, float t_max, hit_data& data) const;
-
-		void append(Surface* s);
-		void clear() { free();  m_vList.clear(); };
-		const int size() const { return m_vList.size(); };
-
-	private:
-		std::vector<Surface*> m_vList;
-
-		void free();
+		SurfaceList() {}
+		SurfaceList(Surface **l, int n) { m_list = l; m_listSize = n; }
+		virtual bool hit(const Ray& r, float tmin, float tmax, hit_data& rec) const;
+		//void free();
+		Surface **m_list;
+		int m_listSize;
 	};
 
-	SurfaceList::~SurfaceList()
-	{
-		free();
-	}
-
-	bool SurfaceList::hit(const Ray& r, float t_min, float t_max, hit_data& data) const
-	{
-		hit_data tempData;
-		bool hitSurface = false;
-		double closest = t_max;
-
-		//Check for hits and output
-		for (int i(0); i < m_vList.size(); ++i)
-		{
-			if (m_vList[i]->hit(r, t_min, closest, tempData))
-			{
-				hitSurface = true;
-				closest = tempData.t;
-				data = tempData;
+	bool SurfaceList::hit(const Ray& r, float t_min, float t_max, hit_data& rec) const {
+		hit_data temp_rec;
+		bool hit_anything = false;
+		double closest_so_far = t_max;
+		for (int i = 0; i < m_listSize; i++) {
+			if (m_list[i]->hit(r, t_min, closest_so_far, temp_rec)) {
+				hit_anything = true;
+				closest_so_far = temp_rec.t;
+				rec = temp_rec;
 			}
 		}
-		return hitSurface;
+		return hit_anything;
 	}
 
-	void SurfaceList::append(Surface* s)
-	{
-		m_vList.push_back(s);
-	}
-
-	void SurfaceList::free()
-	{
-		if (m_vList.size() > 0)
-			for (Surface* s : m_vList)
-				if (s)
-				{
-					delete s;
-					s = nullptr;
-				}
-	}
+	//void SurfaceList::free()
+	//{
+	//	if (m_listSize > 0)
+	//		for (int i(0); i < m_listSize; ++i)
+	//		{
+	//			if (m_list[i])
+	//			{
+	//				Sphere* s = reinterpret_cast<Sphere*>(m_list[i]);
+	//				if (s)
+	//				{
+	//					s->freeMat();
+	//				}
+	//				delete m_list[i];
+	//				m_list[i] = nullptr;
+	//			}
+	//		}
+	//}
 }
