@@ -55,12 +55,13 @@ int main()
 	Vec3 origin(0.0f, 0.0f, 0.0f);
 
 	//World List
-	Surface* objects[4];
-	objects[0] = new Sphere(Vec3(0, 0, -1),			0.5, new Lambertian(Vec3(0.8,0.3,0.3)));
+	Surface* objects[5];
+	objects[0] = new Sphere(Vec3(0, 0, -1),			0.5, new Lambertian(Vec3(0.1,0.2,0.5)));
 	objects[1] = new Sphere(Vec3(0, -100.5, -1),	100, new Lambertian(Vec3(0.8, 0.8, 0.0)));
-	objects[2] = new Sphere(Vec3(1, 0, -1),			0.5, new Metal(Vec3(0.8, 0.6, 0.2), 0.25));
-	objects[3] = new Sphere(Vec3(-1, 0, -1),		0.5, new Metal(Vec3(0.8, 0.8, 0.8), 1));
-	Surface* world = new SurfaceList(objects, 4);
+	objects[2] = new Sphere(Vec3(1, 0, -1),			0.5, new Metal(Vec3(0.8, 0.6, 0.2), 0.2));
+	objects[3] = new Sphere(Vec3(-1, 0, -1),		0.5, new Dialectric(1.5));
+	objects[4] = new Sphere(Vec3(-1, 0, -1),		-0.45, new Dialectric(1.5));
+	Surface* world = new SurfaceList(objects, 5);
 
 	//Camera
 	Camera cam(k_px_width, k_px_height);
