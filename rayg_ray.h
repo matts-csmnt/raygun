@@ -13,7 +13,7 @@ namespace ray_g {
 
 		Vec3 origin() const { return A; };
 		Vec3 direction() const { return B; };
-		Vec3 point_at_param(float t) const { return A + B; };
+		Vec3 point_at_param(float t) const { return A + t*B; };
 
 		Vec3 A;	//Origin
 		Vec3 B;	//Direction

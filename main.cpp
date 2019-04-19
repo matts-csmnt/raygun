@@ -65,7 +65,7 @@ int main()
 	//Camera
 	Camera cam(k_px_width, k_px_height);
 
-	for (int j(0); j < k_px_height; j++)
+	for (int j = k_px_height - 1; j >= 0; j--)
 	{
 		for (int i(0); i < k_px_width; i++)
 		{
@@ -82,7 +82,7 @@ int main()
 				col += colour(r, world, 0);
 			}
 
-			col /= k_num_aa_samples;
+			col /= float(k_num_aa_samples);
 
 			//gamma correct
 			col = Vec3(sqrt(col[0]), sqrt(col[1]), sqrt(col[2]));
