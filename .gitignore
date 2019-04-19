@@ -31,9 +31,6 @@
 *.out
 *.app
 
-# Images
-*.bmp
-
 # Debug etc.
 /.vs
 /Debug
