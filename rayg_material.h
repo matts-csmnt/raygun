@@ -26,13 +26,14 @@ namespace ray_g {
 	//metal material
 	class Metal : public Material {
 	public:
-		Metal(const Vec3& a) : m_albedo(a) {}
+		Metal(const Vec3& a, float f) : m_albedo(a), m_fuzz(f) {}
 		bool scatter(const Ray& in, const hit_data& data, Vec3& attenuation, Ray& scattered) const override {
 			Vec3 reflected = reflect(unit_vector(in.direction()), data.normal);
-			scattered = Ray(data.p, reflected - data.p);
+			scattered = Ray(data.p, reflected + m_fuzz * random_in_unit_sphere());
 			attenuation = m_albedo;
 			return (dot(scattered.direction(), data.normal) > 0);
 		}
 		Vec3 m_albedo;
+		float m_fuzz;
 	};
 }

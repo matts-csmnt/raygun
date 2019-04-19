@@ -31,7 +31,6 @@ namespace ray_g {
 		SurfaceList() {}
 		SurfaceList(Surface **l, int n) { m_list = l; m_listSize = n; }
 		virtual bool hit(const Ray& r, float tmin, float tmax, hit_data& rec) const;
-		//void free();
 		Surface **m_list;
 		int m_listSize;
 	};
@@ -49,22 +48,4 @@ namespace ray_g {
 		}
 		return hit_anything;
 	}
-
-	//void SurfaceList::free()
-	//{
-	//	if (m_listSize > 0)
-	//		for (int i(0); i < m_listSize; ++i)
-	//		{
-	//			if (m_list[i])
-	//			{
-	//				Sphere* s = reinterpret_cast<Sphere*>(m_list[i]);
-	//				if (s)
-	//				{
-	//					s->freeMat();
-	//				}
-	//				delete m_list[i];
-	//				m_list[i] = nullptr;
-	//			}
-	//		}
-	//}
 }

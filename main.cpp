@@ -11,9 +11,9 @@
 #include "Libraries/stb/stb_image_write.h"
 
 constexpr double kMultiplier = 255.99;
-constexpr int k_px_width = 300;
-constexpr int k_px_height = 150;
-constexpr int k_num_aa_samples = 10;
+constexpr int k_px_width = 400;
+constexpr int k_px_height = 200;
+constexpr int k_num_aa_samples = 25;
 using RGBA_Channels = unsigned char[3];
 
 using namespace ray_g;
@@ -58,8 +58,8 @@ int main()
 	Surface* objects[4];
 	objects[0] = new Sphere(Vec3(0, 0, -1),			0.5, new Lambertian(Vec3(0.8,0.3,0.3)));
 	objects[1] = new Sphere(Vec3(0, -100.5, -1),	100, new Lambertian(Vec3(0.8, 0.8, 0.0)));
-	objects[2] = new Sphere(Vec3(1, 0, -1),			0.5, new Metal(Vec3(0.8, 0.6, 0.2)));
-	objects[3] = new Sphere(Vec3(-1, 0, -1),		0.5, new Metal(Vec3(0.8, 0.8, 0.8)));
+	objects[2] = new Sphere(Vec3(1, 0, -1),			0.5, new Metal(Vec3(0.8, 0.6, 0.2), 0.25));
+	objects[3] = new Sphere(Vec3(-1, 0, -1),		0.5, new Metal(Vec3(0.8, 0.8, 0.8), 1));
 	Surface* world = new SurfaceList(objects, 4);
 
 	//Camera
@@ -109,7 +109,6 @@ int main()
 	}
 
 	delete[] world;
-	//reinterpret_cast<SurfaceList*>(world)->free();
 	
 	return 0;
 }
