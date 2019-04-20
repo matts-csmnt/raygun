@@ -1,6 +1,5 @@
 #pragma once
 #include "rayg_ray.h"
-#include <vector>
 
 //ray_g Surface class:
 //A Hittable object & the Hit record data

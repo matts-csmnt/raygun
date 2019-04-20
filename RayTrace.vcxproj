@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="common_defines.h" />
     <ClInclude Include="randf.h" />
     <ClInclude Include="rayg_camera.h" />
     <ClInclude Include="rayg_material.h" />

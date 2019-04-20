@@ -61,9 +61,9 @@ namespace ray_g {
 		return r0 + (1 - r0)*pow((1 - cos), 5);
 	}
 
-	class Dialectric : public Material {
+	class Dielectric : public Material {
 	public:
-		Dialectric(float ri) : m_refIdx(ri) {}
+		Dielectric(float ri) : m_refIdx(ri) {}
 		bool scatter(const Ray& in, const hit_data& data, Vec3& attenuation, Ray& scattered) const override {
 			Vec3 outwardNormal;
 			Vec3 reflected = reflect(in.direction(), data.normal);
