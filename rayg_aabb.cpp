@@ -30,36 +30,6 @@ namespace ray_g {
 		}
 	}
 
-	AABB& AABB::operator=(const AABB& other)
-	{
-		if (this != &other)
-		{
-			this->m_max = other.max();
-			this->m_min = other.min();
-		}
-		return *this;
-	}
-
-	/*bool AABB::hit(const Ray& r, float tmin, float tmax) const {
-		for (int a(0); a < 3; a++)
-		{
-			float invD = 1.0f / r.direction()[a];
-			float t0 = (min()[a] - r.origin()[a]) * invD;
-			float t1 = (max()[a] - r.origin()[a]) * invD;
-			if (invD < 0.0f) {
-				std::swap(t0, t1);
-			}
-			tmin = t0 > tmin ? t0 : tmin;
-			tmax = t1 < tmax ? t0 : tmax;
-
-			if (tmax <= tmin) {
-				return false;
-			}
-
-			return true;
-		}
-	};*/
-
 	AABB surroundingBox(const AABB & b0, const AABB & b1)
 	{
 		//combine boxes and return a big surrounding box

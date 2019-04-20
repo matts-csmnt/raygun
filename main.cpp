@@ -95,11 +95,11 @@ int main()
 
 	//World List
 	SurfaceList world;
-	//world.add(new Sphere(Vec3(0, 0, -1),			0.5, new Lambertian(Vec3(0.1,0.2,0.5))));
+	//world.add(new Sphere(Vec3(0, 0, -1),			1, new Lambertian(Vec3(0.1,0.2,0.5))));
 	//world.add(new Sphere(Vec3(0, -100.5, -1),	100, new Lambertian(Vec3(0.8, 0.8, 0.0))));
-	//world.add(new Sphere(Vec3(1, 0, -1),			0.5, new Metal(Vec3(0.8, 0.6, 0.2), 0.2)));
-	//world.add(new Sphere(Vec3(-1, 0, -1),		0.5, new Dielectric(1.5)));
-	//world.add(new Sphere(Vec3(-1, 0, -1),		-0.45, new Dielectric(1.5)));
+	//world.add(new Sphere(Vec3(1, 0, -1),			1, new Metal(Vec3(0.8, 0.6, 0.2), 0.2)));
+	//world.add(new Sphere(Vec3(-1, 0, -1),		1, new Dielectric(1.5)));
+	//world.add(new Sphere(Vec3(-1, 0, -1),		-0.9, new Dielectric(1.5)));
 
 	world = RandomScene();
 
