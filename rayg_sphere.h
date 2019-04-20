@@ -16,6 +16,7 @@ namespace ray_g {
 		Sphere(const Vec3& center, float radius, Material* mat) : m_center(center), m_radius(radius), m_material(mat) {};
 		virtual bool hit(const Ray& r, float t_min, float t_max, hit_data& data) const;
 		virtual void cleanup();
+		virtual bool boundingBox(float t0, float t1, AABB& bb) const;
 
 		const Vec3& getCenter() { return m_center; };
 		const float getRadius() { return m_radius; };
@@ -40,6 +41,7 @@ namespace ray_g {
 		virtual bool hit(const Ray& r, float tmin, float tmax, hit_data& data) const;
 		Vec3 center(float time) const;
 		virtual void cleanup();
+		virtual bool boundingBox(float t0, float t1, AABB& bb) const;
 
 		Vec3 m_center0, m_center1;
 		float m_time0, m_time1;

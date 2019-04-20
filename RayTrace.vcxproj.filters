@@ -60,6 +60,9 @@
     <ClInclude Include="rayg_aabb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="rayg_bvh.h">
+      <Filter>Header Files\Surface Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -81,6 +84,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="common_defines.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_aabb.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_bvh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

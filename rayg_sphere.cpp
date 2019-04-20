@@ -50,6 +50,12 @@ namespace ray_g {
 		SAFE_DELETE(m_material);
 	}
 
+	bool Sphere::boundingBox(float t0, float t1, AABB & bb) const
+	{
+		bb = AABB(m_center - Vec3(m_radius), m_center + Vec3(m_radius));
+		return true;
+	}
+
 	//-------------
 	//MOVING SPHERE
 	//-------------
@@ -101,5 +107,14 @@ namespace ray_g {
 	void MovingSphere::cleanup()
 	{
 		SAFE_DELETE(m_material);
+	}
+
+	bool MovingSphere::boundingBox(float t0, float t1, AABB & bb) const
+	{
+		AABB b0 = AABB(m_center0 - Vec3(m_radius), m_center0 + Vec3(m_radius));
+		AABB b1 = AABB(m_center1 - Vec3(m_radius), m_center1 + Vec3(m_radius));
+
+		bb = surroundingBox(b0, b1);
+		return true;
 	}
 }

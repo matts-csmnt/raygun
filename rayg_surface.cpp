@@ -27,4 +27,8 @@ namespace ray_g {
 		}
 		return hit_anything;
 	}
+	bool SurfaceList::boundingBox(float t0, float t1, AABB & bb) const
+	{
+		return false;	//TODO
+	}
 }
