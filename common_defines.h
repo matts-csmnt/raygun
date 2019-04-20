@@ -9,3 +9,5 @@
 float degToRad(float d) {
 	return d * (M_PI / 180);
 }
+
+#define SAFE_DELETE(x){if(x){delete x; x = nullptr;}}

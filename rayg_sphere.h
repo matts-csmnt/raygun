@@ -11,6 +11,7 @@ namespace ray_g {
 		Sphere() {};
 		Sphere(const Vec3& center, float radius, Material* mat) : m_center(center), m_radius(radius), m_material(mat) {};
 		virtual bool hit(const Ray& r, float t_min, float t_max, hit_data& data) const;
+		virtual void cleanup();
 
 		const Vec3& getCenter() { return m_center; };
 		const float getRadius() { return m_radius; };
@@ -59,5 +60,10 @@ namespace ray_g {
 			}
 		}
 		return false;
+	}
+	
+	void Sphere::cleanup()
+	{
+		SAFE_DELETE(m_material);
 	}
 }
