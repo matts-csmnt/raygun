@@ -15,6 +15,7 @@ constexpr int k_px_width = 400;
 constexpr int k_px_height = 200;
 constexpr int k_num_aa_samples = 25;
 using RGBA_Channels = unsigned char[3];
+static const Vec3 kUpVec = Vec3( 0, 1, 0 );
 
 using namespace ray_g;
 
@@ -48,12 +49,6 @@ int main()
 {
 	RGBA_Channels* pixels = new RGBA_Channels[k_px_width*k_px_height];
 
-	//image bounds
-	Vec3 lowerLeftCrnr(-(float)k_px_width / 100, -(float)k_px_height / 100, -1.0);
-	Vec3 horizontalUnits(((float)k_px_width / 100) * 2, 0.0f, 0.0);
-	Vec3 verticalUnits(0.0f, ((float)k_px_height / 100) * 2, 0.0f);
-	Vec3 origin(0.0f, 0.0f, 0.0f);
-
 	//World List
 	Surface* objects[5];
 	objects[0] = new Sphere(Vec3(0, 0, -1),			0.5, new Lambertian(Vec3(0.1,0.2,0.5)));
@@ -64,7 +59,7 @@ int main()
 	Surface* world = new SurfaceList(objects, 5);
 
 	//Camera
-	Camera cam(k_px_width, k_px_height);
+	Camera cam(Vec3(-2,2,1), Vec3(0,0,-1), kUpVec, k_px_width, k_px_height, 90);
 
 	for (int j = k_px_height - 1; j >= 0; j--)
 	{
