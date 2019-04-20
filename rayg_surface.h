@@ -43,11 +43,12 @@ namespace ray_g {
 		//Vector accessors
 		void add(Surface* s) { m_vList.push_back(s); }
 		void clear() { m_vList.clear(); }
-		int size() const { m_vList.size(); }
+		int size() const { return m_vList.size(); }
 		std::vector<Surface*>& getList() { return m_vList; }
 		void cleanup();
 
 	private:
 		std::vector<Surface*> m_vList;
+		AABB m_box;
 	};
 }

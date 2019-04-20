@@ -21,6 +21,7 @@ namespace ray_g {
 	public:
 		AABB() {}
 		AABB(const Vec3& a, const Vec3& b) : m_min(a), m_max(b) {}
+		AABB& operator=(const AABB&);
 
 		Vec3 min() const { return m_min; }
 		Vec3 max() const { return m_max; }

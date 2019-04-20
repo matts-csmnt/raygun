@@ -4,6 +4,7 @@
 #include "rayg_sphere.h"
 #include "rayg_camera.h"
 #include "rayg_material.h"
+#include "rayg_bvh.h"
 #include "randf.h"
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
@@ -18,11 +19,10 @@ using RGBA_Channels = unsigned char[3];
 static const ray_g::Vec3 kUpVec = ray_g::Vec3( 0, 1, 0 );
 
 namespace ray_g {
-	Vec3 colour(const Ray& r, SurfaceList world, int depth)
+	Vec3 colour(const Ray& r, Surface* world, int depth)
 	{
 		hit_data data;
-
-		if (world.hit(r, 0.001, FLT_MAX, data))
+		if (world->hit(r, 0.001, FLT_MAX, data))
 		{
 			Ray scattered;
 			Vec3 attenuation;
@@ -111,6 +111,8 @@ int main()
 
 	Camera cam(lookfrom, lookat, kUpVec, k_px_width, k_px_height, 20, aperture, distToFocus, 0, 1);
 
+	BVHNode worldTree(&world.getList()[0], world.size(), 0.0, 1.0);
+
 	for (int j = k_px_height - 1; j >= 0; j--)
 	{
 		for (int i(0); i < k_px_width; i++)
@@ -125,7 +127,7 @@ int main()
 				float v = float(j + randf()) / float(k_px_height);
 
 				Ray r = cam.getRay(u, v);
-				col += colour(r, world, 0);
+				col += colour(r, &worldTree, 0);
 			}
 
 			col /= float(k_num_aa_samples);

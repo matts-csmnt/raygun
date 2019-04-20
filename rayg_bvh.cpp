@@ -117,7 +117,7 @@ namespace ray_g {
 		{
 			hit_data leftData, rightData;
 			bool hitLeft = m_left->hit(r, tmin, tmax, leftData);
-			bool hitRight = m_left->hit(r, tmin, tmax, rightData);
+			bool hitRight = m_right->hit(r, tmin, tmax, rightData);
 
 			if (hitLeft && hitRight)
 			{
@@ -140,7 +140,7 @@ namespace ray_g {
 			else
 				return false;
 		}
-		return false;
+		else return false;
 	}
 
 	bool BVHNode::boundingBox(float t0, float t1, AABB & bb) const

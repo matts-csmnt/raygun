@@ -111,8 +111,8 @@ namespace ray_g {
 
 	bool MovingSphere::boundingBox(float t0, float t1, AABB & bb) const
 	{
-		AABB b0 = AABB(m_center0 - Vec3(m_radius), m_center0 + Vec3(m_radius));
-		AABB b1 = AABB(m_center1 - Vec3(m_radius), m_center1 + Vec3(m_radius));
+		AABB b0 = AABB(center(t0) - Vec3(m_radius), center(t0) + Vec3(m_radius));
+		AABB b1 = AABB(center(t1) - Vec3(m_radius), center(t1) + Vec3(m_radius));
 
 		bb = surroundingBox(b0, b1);
 		return true;
