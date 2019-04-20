@@ -1,17 +1,15 @@
 #pragma once
 #include "rayg_ray.h"
+
 #include <vector>
-#include "common_defines.h"
-
-//ray_g Surface class:
-//A Hittable object & the Hit record data
-
-//ray_g SurfaceList class:
-//A List of Hittable objects & the Hit record data
 
 namespace ray_g {
 
 	class Material;	//fwd ref the mat
+
+	//---------------
+	// Hit Data Log
+	//---------------
 
 	struct hit_data {
 		float t;
@@ -20,6 +18,10 @@ namespace ray_g {
 		Material* mat;
 	};
 
+	//---------------
+	// Surface
+	//---------------
+
 	class Surface {
 	public:
 		//pure virtual hit func
@@ -27,7 +29,10 @@ namespace ray_g {
 		virtual void cleanup() = 0;
 	};
 
-	//--
+	//---------------
+	// Surface List
+	//---------------
+
 	class SurfaceList : public Surface {
 	public:
 		SurfaceList() { m_vList.clear(); }
@@ -38,28 +43,9 @@ namespace ray_g {
 		void clear() { m_vList.clear(); }
 		int size() const { m_vList.size(); }
 
-		void cleanup() {
-			for (Surface* s : m_vList) {
-				s->cleanup();
-				SAFE_DELETE(s);
-			} 
-		}
+		void cleanup();
 
 	private:
 		std::vector<Surface*> m_vList;
 	};
-
-	bool SurfaceList::hit(const Ray& r, float t_min, float t_max, hit_data& rec) const {
-		hit_data temp_rec;
-		bool hit_anything = false;
-		double closest_so_far = t_max;
-		for (Surface* s:  m_vList) {
-			if (s->hit(r, t_min, closest_so_far, temp_rec)) {
-				hit_anything = true;
-				closest_so_far = temp_rec.t;
-				rec = temp_rec;
-			}
-		}
-		return hit_anything;
-	}
 }

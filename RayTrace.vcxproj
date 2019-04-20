@@ -117,6 +117,7 @@
   <ItemGroup>
     <ClInclude Include="common_defines.h" />
     <ClInclude Include="randf.h" />
+    <ClInclude Include="rayg_aabb.h" />
     <ClInclude Include="rayg_camera.h" />
     <ClInclude Include="rayg_material.h" />
     <ClInclude Include="rayg_sphere.h" />
@@ -127,7 +128,13 @@
     <ClInclude Include="rayg_vec3.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="common_defines.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="randf.cpp" />
+    <ClCompile Include="rayg_camera.cpp" />
+    <ClCompile Include="rayg_material.cpp" />
+    <ClCompile Include="rayg_sphere.cpp" />
+    <ClCompile Include="rayg_surface.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

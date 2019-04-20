@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Materials">
       <UniqueIdentifier>{520e77a1-5d35-4323-a8cc-f6c8003f30d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\_Helpers">
+      <UniqueIdentifier>{b2dc82b9-a73b-4da1-8bbe-5f5d9d903465}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Libraries\stb\stb_image.h">
@@ -42,9 +45,6 @@
     <ClInclude Include="rayg_camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="randf.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="rayg_material.h">
       <Filter>Header Files\Materials</Filter>
     </ClInclude>
@@ -52,11 +52,35 @@
       <Filter>Header Files\Surface Objects</Filter>
     </ClInclude>
     <ClInclude Include="common_defines.h">
+      <Filter>Header Files\_Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="randf.h">
+      <Filter>Header Files\_Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="rayg_aabb.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_sphere.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_surface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_material.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="randf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="common_defines.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

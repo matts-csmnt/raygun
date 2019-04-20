@@ -15,75 +15,79 @@ constexpr int k_px_width = 1200;
 constexpr int k_px_height = 600;
 constexpr int k_num_aa_samples = 25;
 using RGBA_Channels = unsigned char[3];
-static const Vec3 kUpVec = Vec3( 0, 1, 0 );
+static const ray_g::Vec3 kUpVec = ray_g::Vec3( 0, 1, 0 );
 
-using namespace ray_g;
-
-Vec3 colour(const Ray& r, SurfaceList world, int depth)
-{
-	hit_data data;
-
-	if (world.hit(r, 0.001, FLT_MAX, data))
+namespace ray_g {
+	Vec3 colour(const Ray& r, SurfaceList world, int depth)
 	{
-		Ray scattered;
-		Vec3 attenuation;
-		if (depth < 50 && data.mat->scatter(r, data, attenuation, scattered))
+		hit_data data;
+
+		if (world.hit(r, 0.001, FLT_MAX, data))
 		{
-			Vec3 col = colour(scattered, world, depth + 1);
-			return attenuation * col;
+			Ray scattered;
+			Vec3 attenuation;
+			if (depth < 50 && data.mat->scatter(r, data, attenuation, scattered))
+			{
+				Vec3 col = colour(scattered, world, depth + 1);
+				return attenuation * col;
+			}
+			else
+			{
+				return Vec3(0, 0, 0);
+			}
 		}
 		else
 		{
-			return Vec3(0, 0, 0);
+			Vec3 unit_dir = unit_vector(r.direction());
+			float t = 0.5 * (unit_dir.y() + 1.0);
+			return (1.0 - t) * Vec3(1.0, 1.0, 1.0) + t * Vec3(0.5, 0.7, 1.0);
 		}
 	}
-	else
+
+	//random scene
+	SurfaceList RandomScene()
 	{
-		Vec3 unit_dir = unit_vector(r.direction());
-		float t = 0.5 * (unit_dir.y() + 1.0);
-		return (1.0 - t) * Vec3(1.0, 1.0, 1.0) + t * Vec3(0.5, 0.7, 1.0);
-	}
-}
+		SurfaceList sl;
 
-//random scene
-SurfaceList RandomScene()
-{
-	SurfaceList sl;
+		//floor
+		sl.add(new Sphere(Vec3(0, -1000, 0), 1000, new Lambertian(Vec3((0.8, 0.8, 0.1)))));
 
-	//floor
-	sl.add(new Sphere(Vec3(0, -1000, 0), 1000, new Lambertian(Vec3((0.8, 0.8, 0.1)))));
-
-	for (int a = -11; a < 11; a++)
-	{
-		for (int b = -11; b < 11; b++)
+		for (int a = -11; a < 11; a++)
 		{
-			float chooseMat = randf();
-			Vec3 center(a + 0.9*randf(), 0.2, b + 0.9*randf());
-
-			if ((center - Vec3(4, 0.2, 0)).length() > 0.9)
+			for (int b = -11; b < 11; b++)
 			{
-				if (chooseMat < 0.8) {	//diffuse material
-					sl.add(new Sphere(center, 0.2,
-						new Lambertian(Vec3(randf()*randf(), randf()*randf(), randf()*randf()))));
-				}
-				else if (chooseMat < 0.95) {	//Metallics
-					sl.add(new Sphere(center, 0.2,
-						new Metal(Vec3(0.5*(1 + randf()), 0.5*(1 + randf()), 0.5*(1 + randf())), 0.5*(1 + randf()))));
-				}
-				else {	//glass/dielectrics
-					sl.add(new Sphere(center, 0.2, new Dielectric(1.5)));
+				float chooseMat = randf();
+				Vec3 center(a + 0.9*randf(), 0.2, b + 0.9*randf());
+
+				if ((center - Vec3(4, 0.2, 0)).length() > 0.9)
+				{
+					if (chooseMat < 0.8) {	//diffuse material
+						//sl.add(new Sphere(center, 0.2,
+						//	new Lambertian(Vec3(randf()*randf(), randf()*randf(), randf()*randf()))));
+						sl.add(new MovingSphere(center, center + Vec3(0, 0.5*randf(), 0), 0, 1, 0.2,
+							new Lambertian(Vec3(randf()*randf(), randf()*randf(), randf()*randf()))));
+					}
+					else if (chooseMat < 0.95) {	//Metallics
+						sl.add(new Sphere(center, 0.2,
+							new Metal(Vec3(0.5*(1 + randf()), 0.5*(1 + randf()), 0.5*(1 + randf())), 0.5*(1 + randf()))));
+					}
+					else {	//glass/dielectrics
+						sl.add(new Sphere(center, 0.2, new Dielectric(1.5)));
+					}
 				}
 			}
 		}
+
+		//Add main focus points (large spheres)
+		sl.add(new Sphere(Vec3(0, 1, 0), 1.0, new Dielectric(1.5)));
+		sl.add(new Sphere(Vec3(-4, 1, 0), 1.0, new Lambertian(Vec3(0.4, 0.4, 0.1))));
+		sl.add(new Sphere(Vec3(4, 1, 0), 1.0, new Metal(Vec3(0.7, 0.6, 0.5), 0.0)));	//chrome!
+
+		return sl;
 	}
-
-	//Add main focus points (large spheres)
-	sl.add(new Sphere(Vec3(0, 1, 0), 1.0, new Dielectric(1.5)));
-	sl.add(new Sphere(Vec3(-4, 1, 0), 1.0, new Lambertian(Vec3(0.4, 0.4, 0.1))));
-	sl.add(new Sphere(Vec3(4, 1, 0), 1.0, new Metal(Vec3(0.7, 0.6, 0.5), 0.0)));	//chrome!
-
-	return sl;
 }
+
+using namespace ray_g;
 
 int main()
 {
@@ -105,7 +109,7 @@ int main()
 	float distToFocus = (lookfrom - lookat).length();
 	float aperture = 0.1;
 
-	Camera cam(lookfrom, lookat, kUpVec, k_px_width, k_px_height, 20, aperture, distToFocus);
+	Camera cam(lookfrom, lookat, kUpVec, k_px_width, k_px_height, 20, aperture, distToFocus, 0, 1);
 
 	for (int j = k_px_height - 1; j >= 0; j--)
 	{
