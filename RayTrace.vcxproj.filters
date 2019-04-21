@@ -19,11 +19,11 @@
     <Filter Include="Header Files\Surface Objects">
       <UniqueIdentifier>{8354c6c1-2249-41c2-a6e1-7790569d9e97}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Materials">
-      <UniqueIdentifier>{520e77a1-5d35-4323-a8cc-f6c8003f30d3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\_Helpers">
       <UniqueIdentifier>{b2dc82b9-a73b-4da1-8bbe-5f5d9d903465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Materials &amp; Textures">
+      <UniqueIdentifier>{520e77a1-5d35-4323-a8cc-f6c8003f30d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -46,7 +46,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rayg_material.h">
-      <Filter>Header Files\Materials</Filter>
+      <Filter>Header Files\Materials &amp; Textures</Filter>
     </ClInclude>
     <ClInclude Include="rayg_surface.h">
       <Filter>Header Files\Surface Objects</Filter>
@@ -62,6 +62,9 @@
     </ClInclude>
     <ClInclude Include="rayg_bvh.h">
       <Filter>Header Files\Surface Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="rayg_texture.h">
+      <Filter>Header Files\Materials &amp; Textures</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +93,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rayg_bvh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

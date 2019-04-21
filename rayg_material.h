@@ -1,6 +1,9 @@
 #pragma once
 #include "rayg_surface.h"
+#include "rayg_texture.h"
 #include "rayg_ray.h"
+
+#include "common_defines.h"
 
 namespace ray_g {
 	
@@ -19,9 +22,10 @@ namespace ray_g {
 
 	class Lambertian : public Material {
 	public:
-		Lambertian(const Vec3& a) : m_albedo(a) {}
+		Lambertian(Texture* a) : m_albedo(a) {}
+		~Lambertian() { SAFE_DELETE(m_albedo); }
 		bool scatter(const Ray& in, const hit_data& data, Vec3& attenuation, Ray& scattered) const;
-		Vec3 m_albedo;
+		Texture* m_albedo;
 	};
 
 	//-------------
@@ -30,10 +34,11 @@ namespace ray_g {
 
 	class Metal : public Material {
 	public:
-		Metal(const Vec3& a, float f) : m_albedo(a), m_fuzz(f) {}
+		Metal(Texture* a, float f) : m_albedo(a), m_fuzz(f) {}
+		~Metal() { SAFE_DELETE(m_albedo); }
 		bool scatter(const Ray& in, const hit_data& data, Vec3& attenuation, Ray& scattered) const;
-		Vec3 m_albedo;
 		float m_fuzz;
+		Texture* m_albedo;
 	};
 
 	//-------------

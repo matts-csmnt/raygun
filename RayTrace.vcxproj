@@ -126,6 +126,7 @@
     <ClInclude Include="Libraries\stb\stb_image_write.h" />
     <ClInclude Include="rayg_ray.h" />
     <ClInclude Include="rayg_surface.h" />
+    <ClInclude Include="rayg_texture.h" />
     <ClInclude Include="rayg_vec3.h" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +139,7 @@
     <ClCompile Include="rayg_material.cpp" />
     <ClCompile Include="rayg_sphere.cpp" />
     <ClCompile Include="rayg_surface.cpp" />
+    <ClCompile Include="rayg_texture.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

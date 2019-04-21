@@ -24,7 +24,7 @@ namespace ray_g {
 	bool Lambertian::scatter(const Ray& in, const hit_data& data, Vec3& attenuation, Ray& scattered) const {
 		Vec3 target = data.p + data.normal + random_in_unit_sphere();
 		scattered = Ray(data.p, target - data.p, in.time());
-		attenuation = m_albedo;
+		attenuation = m_albedo->value(0, 0, data.p);
 		return true;
 	}
 
@@ -35,7 +35,7 @@ namespace ray_g {
 	bool Metal::scatter(const Ray& in, const hit_data& data, Vec3& attenuation, Ray& scattered) const {
 		Vec3 reflected = reflect(unit_vector(in.direction()), data.normal);
 		scattered = Ray(data.p, reflected + m_fuzz * random_in_unit_sphere(), in.time());
-		attenuation = m_albedo;
+		attenuation = m_albedo->value(0, 0, data.p);
 		return (dot(scattered.direction(), data.normal) > 0);
 	}
 
