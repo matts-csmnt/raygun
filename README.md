@@ -2,7 +2,8 @@
 Pathtracing image renderer done for fun.
 
 ![current output image](raytrace_output.bmp)
- 
+![noise output image](raytrace_noise01.bmp)
+
 Following Pete Shirley's books for now.
 Maybe in the future I'll get triangle-based scenes going...
 
