@@ -17,6 +17,7 @@ namespace ray_g {
 		Vec3 p;
 		Vec3 normal;
 		Material* mat;
+		float u, v;
 	};
 
 	//---------------
@@ -52,4 +53,10 @@ namespace ray_g {
 		std::vector<Surface*> m_vList;
 		AABB m_box;
 	};
+
+	//---------------
+	// Utility
+	//---------------
+
+	void getSphereUV(const Vec3& p, float& u, float& v);
 }

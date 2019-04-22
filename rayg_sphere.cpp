@@ -27,6 +27,7 @@ namespace ray_g {
 				data.p = r.point_at_param(data.t);
 				data.normal = (data.p - m_center) / m_radius;
 				data.mat = m_material;
+				getSphereUV((data.p - m_center)/m_radius, data.u, data.v);
 				return true;
 			}
 
@@ -39,6 +40,7 @@ namespace ray_g {
 				data.p = r.point_at_param(data.t);
 				data.normal = (data.p - m_center) / m_radius;
 				data.mat = m_material;
+				getSphereUV((data.p - m_center)/m_radius, data.u, data.v);
 				return true;
 			}
 		}

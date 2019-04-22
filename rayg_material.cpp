@@ -24,7 +24,7 @@ namespace ray_g {
 	bool Lambertian::scatter(const Ray& in, const hit_data& data, Vec3& attenuation, Ray& scattered) const {
 		Vec3 target = data.p + data.normal + random_in_unit_sphere();
 		scattered = Ray(data.p, target - data.p, in.time());
-		attenuation = m_albedo->value(0, 0, data.p);
+		attenuation = m_albedo->value(data.u, data.v, data.p);
 		return true;
 	}
 

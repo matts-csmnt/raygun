@@ -53,4 +53,18 @@ namespace ray_g {
 		float m_scale;
 		int m_mode;
 	};
+
+	//--------------
+	// IMAGE TEXTURE
+	//--------------
+
+	class ImageTexture : public Texture {
+	public:
+		ImageTexture() {}
+		~ImageTexture();
+		ImageTexture(unsigned char* data, int A, int B) : m_data(data), m_nx(A), m_ny(B) {}
+		virtual Vec3 value(float u, float v, const Vec3& p) const;
+		unsigned char* m_data;
+		int m_nx, m_ny;
+	};
 }

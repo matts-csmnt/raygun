@@ -13,6 +13,9 @@
 #define STBI_MSC_SECURE_CRT
 #include "Libraries/stb/stb_image_write.h"
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "Libraries/stb/stb_image.h"
+
 constexpr double kMultiplier = 255.99;
 constexpr int k_px_width = 1200;
 constexpr int k_px_height = 600;
@@ -31,7 +34,7 @@ namespace ray_g {
 			if (depth < 50 && data.mat->scatter(r, data, attenuation, scattered))
 			{
 				Vec3 col = colour(scattered, world, depth + 1);
-				return attenuation * col;
+				return attenuation *col;
 			}
 			else
 			{
@@ -56,6 +59,11 @@ int main()
 	//World List
 	SurfaceList world;
 	world = TwoPerlinSpheres();	//RandomScene();
+
+	//add textured sphere
+	int nx, ny, nn;
+	unsigned char* textureData = stbi_load("Media/Textures/earth.jpg", &nx, &ny, &nn, 0);
+	world.add(new Sphere(Vec3(4, 1, 0), 1, new Lambertian(new ImageTexture(textureData, nx, ny))));
 
 	//Camera
 	Vec3 lookfrom(13, 2, 3);
