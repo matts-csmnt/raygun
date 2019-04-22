@@ -19,7 +19,7 @@
 constexpr double kMultiplier = 255.99;
 constexpr int k_px_width = 1200;
 constexpr int k_px_height = 600;
-constexpr int k_num_aa_samples = 25;
+constexpr int k_num_aa_samples = 100;
 using RGBA_Channels = unsigned char[3];
 static const ray_g::Vec3 kUpVec = ray_g::Vec3( 0, 1, 0 );
 
