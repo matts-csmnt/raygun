@@ -28,6 +28,7 @@ namespace ray_g {
 
 			return true;
 		}
+		return false;
 	}
 
 	AABB surroundingBox(const AABB & b0, const AABB & b1)

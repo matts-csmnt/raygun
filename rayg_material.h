@@ -13,6 +13,7 @@ namespace ray_g {
 
 	class Material {
 	public:
+		virtual ~Material() {};
 		virtual bool scatter(const Ray& in, const hit_data& data, Vec3& attenuation, Ray& scattered) const = 0;
 	};
 
@@ -47,6 +48,7 @@ namespace ray_g {
 
 	class Dielectric : public Material {
 	public:
+		~Dielectric() {}
 		Dielectric(float ri) : m_refIdx(ri) {}
 		bool scatter(const Ray& in, const hit_data& data, Vec3& attenuation, Ray& scattered) const;
 		float m_refIdx;

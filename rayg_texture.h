@@ -3,6 +3,8 @@
 
 namespace ray_g {
 
+	class Perlin;	//fwd ref noise
+
 	//--------------
 	//TEXTURE CLASS
 	//--------------
@@ -36,5 +38,16 @@ namespace ray_g {
 		virtual Vec3 value(float u, float v, const Vec3& p) const;
 		Texture* m_odd;
 		Texture* m_even;
+	};
+
+	//--------------
+	// NOISE TEXTURE
+	//--------------
+
+	class NoiseTexture : public Texture {
+	public:
+		NoiseTexture() {}
+		virtual Vec3 value(float u, float v, const Vec3& p) const;
+		Perlin* m_noise;
 	};
 }

@@ -25,6 +25,12 @@
     <Filter Include="Header Files\Materials &amp; Textures">
       <UniqueIdentifier>{520e77a1-5d35-4323-a8cc-f6c8003f30d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Scenes">
+      <UniqueIdentifier>{271530ee-ab91-456f-b84b-6cc0d64ffb58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core">
+      <UniqueIdentifier>{22e84e9c-9c3f-4668-b582-43d180651138}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Libraries\stb\stb_image.h">
@@ -33,17 +39,8 @@
     <ClInclude Include="Libraries\stb\stb_image_write.h">
       <Filter>Libraries</Filter>
     </ClInclude>
-    <ClInclude Include="rayg_vec3.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="rayg_ray.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="rayg_sphere.h">
       <Filter>Header Files\Surface Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="rayg_camera.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="rayg_material.h">
       <Filter>Header Files\Materials &amp; Textures</Filter>
@@ -57,14 +54,29 @@
     <ClInclude Include="randf.h">
       <Filter>Header Files\_Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="rayg_aabb.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="rayg_bvh.h">
       <Filter>Header Files\Surface Objects</Filter>
     </ClInclude>
     <ClInclude Include="rayg_texture.h">
       <Filter>Header Files\Materials &amp; Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="rayg_perlin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rayg_scenes.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="rayg_camera.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="rayg_ray.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="rayg_vec3.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="rayg_aabb.h">
+      <Filter>Header Files\Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -96,6 +108,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rayg_texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_perlin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_scenes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -26,6 +26,7 @@ namespace ray_g {
 	class Surface {
 	public:
 		//pure virtual hit func
+		virtual ~Surface() {}
 		virtual bool hit(const Ray& r, float t_min, float t_max, hit_data& data) const = 0;
 		virtual void cleanup() = 0;
 		virtual bool boundingBox(float t0, float t1, AABB& bb) const = 0;
