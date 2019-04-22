@@ -47,7 +47,10 @@ namespace ray_g {
 	class NoiseTexture : public Texture {
 	public:
 		NoiseTexture() {}
+		NoiseTexture(float sc, int mode = 0) : m_scale(sc), m_mode(mode) {}
 		virtual Vec3 value(float u, float v, const Vec3& p) const;
 		Perlin* m_noise;
+		float m_scale;
+		int m_mode;
 	};
 }

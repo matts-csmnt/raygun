@@ -68,7 +68,7 @@ namespace ray_g{
 	SurfaceList TwoPerlinSpheres()
 	{
 		SurfaceList sl;
-		Texture* pPerlin = new NoiseTexture();
+		Texture* pPerlin = new NoiseTexture(5, 2);
 		sl.add(new Sphere(Vec3(0, -1000, 0), 1000, new Lambertian(pPerlin)));
 		sl.add(new Sphere(Vec3(0, 2, 0), 2, new Lambertian(pPerlin)));
 		return sl;

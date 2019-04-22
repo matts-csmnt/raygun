@@ -13,18 +13,19 @@ namespace ray_g {
 		~Perlin();
 		float noise(const Vec3&) const;
 		void cleanup();
+		float turbulence(const Vec3& p, int depth = 7) const;
 
-		static float* m_randomf;
+		static Vec3* m_randomvec;
 		static int* m_permutationX;
 		static int* m_permutationY;
 		static int* m_permutationZ;
 	};
 
-	static float * perlinGenerate()
+	static Vec3 * perlinGenerate()
 	{
-		float* p = new float[256];
+		Vec3* p = new Vec3[256];
 		for (int i(0); i < 256; ++i)
-			p[i] = randf();
+			p[i] = unit_vector(Vec3(-1 + 2 *randf(), -1 + 2 * randf(), -1 + 2 * randf()));
 		return p;
 	}
 
@@ -47,4 +48,6 @@ namespace ray_g {
 		permute(p, 256);
 		return p;
 	}
+
+	float trilinearInterpolate(Vec3[2][2][2], float, float, float);
 }

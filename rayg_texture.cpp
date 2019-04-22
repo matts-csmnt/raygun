@@ -30,6 +30,18 @@ namespace ray_g {
 
 	Vec3 NoiseTexture::value(float u, float v, const Vec3 & p) const
 	{
-		return Vec3(1) * m_noise->noise(p);
+		switch (m_mode)
+		{
+		case 0:
+		default:	//regular noise
+			return Vec3(1) * 0.5 * (1+m_noise->turbulence(m_scale*p));
+			break;
+		case 1:		//turbulence
+			return Vec3(1) * m_noise->turbulence(m_scale*p);
+			break;
+		case 2:		//marble-like
+			return Vec3(1) * 0.5 * (1 + sin(m_scale*p.z() + 10*m_noise->turbulence(p)));
+			break;
+		}
 	}
 }
