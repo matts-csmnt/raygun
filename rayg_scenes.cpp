@@ -1,6 +1,7 @@
 #include "rayg_scenes.h"
 #include "rayg_material.h"
 #include "rayg_sphere.h"
+#include "rayg_rects.h"
 
 #include "randf.h"
 
@@ -71,6 +72,23 @@ namespace ray_g{
 		Texture* pPerlin = new NoiseTexture(5, 0);
 		sl.add(new Sphere(Vec3(0, -1000, 0), 1000, new Lambertian(pPerlin)));
 		sl.add(new Sphere(Vec3(0, 2, 0), 2, new Lambertian(pPerlin)));
+		return sl;
+	}
+
+	SurfaceList CornellBox()
+	{
+		SurfaceList sl;
+		Material* white = new Lambertian(new ConstantTexture(Vec3(0.73)));
+		Material* red = new Lambertian(new ConstantTexture(Vec3(0.65,0.05,0.05)));
+		Material* green = new Lambertian(new ConstantTexture(Vec3(0.12,0.45,0.15)));
+		Material* light = new DiffuseLight(new ConstantTexture(Vec3(15)));
+
+		sl.add(new FlipNormals(new YZRect(0,555,0,555,555,green)));
+		sl.add(new YZRect(0, 555, 0, 555, 0, red));
+		sl.add(new XZRect(213, 343, 227, 332, 554, light));
+		sl.add(new FlipNormals(new XYRect(0, 555, 0, 555, 555, white)));
+		sl.add(new XZRect(0, 555, 0, 555, 0, white));
+		sl.add(new FlipNormals(new XYRect(0, 555, 0, 555, 555, white)));
 		return sl;
 	}
 }

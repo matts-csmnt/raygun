@@ -66,4 +66,25 @@ namespace ray_g {
 		u = 1 - (phi + M_PI) / (2 * M_PI);
 		v = (theta + M_PI / 2) / M_PI;
 	}
+	
+	bool FlipNormals::hit(const Ray & r, float t_min, float t_max, hit_data & data) const
+	{
+		if (m_ptr->hit(r, t_min, t_max, data))
+		{
+			data.normal = -data.normal;
+			return true;
+		}
+		else 
+			return false;
+	}
+	
+	void FlipNormals::cleanup()
+	{
+		m_ptr->cleanup();
+	}
+	
+	bool FlipNormals::boundingBox(float t0, float t1, AABB & bb) const
+	{
+		return m_ptr->boundingBox(t0, t1, bb);
+	}
 }

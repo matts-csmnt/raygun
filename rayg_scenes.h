@@ -18,4 +18,5 @@ namespace ray_g {
 	//-------------
 
 	SurfaceList TwoPerlinSpheres();
+	SurfaceList CornellBox();
 }

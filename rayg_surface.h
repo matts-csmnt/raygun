@@ -59,4 +59,14 @@ namespace ray_g {
 	//---------------
 
 	void getSphereUV(const Vec3& p, float& u, float& v);
+
+	class FlipNormals : public Surface {
+	public:
+		FlipNormals(Surface* s) : m_ptr(s){}
+		virtual bool hit(const Ray& r, float t_min, float t_max, hit_data& data) const;
+		virtual void cleanup();
+		virtual bool boundingBox(float t0, float t1, AABB& bb) const;
+
+		Surface* m_ptr;
+	};
 }

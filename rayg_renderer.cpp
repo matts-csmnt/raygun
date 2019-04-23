@@ -146,21 +146,23 @@ namespace ray_g {
 		{
 			Ray scattered;
 			Vec3 attenuation;
+			Vec3 emitted = data.mat->emittted(data.u, data.v, data.p);
 			if (depth < 50 && data.mat->scatter(r, data, attenuation, scattered))
 			{
 				Vec3 col = colour(scattered, world, depth + 1);
-				return attenuation * col;
+				return emitted + attenuation * col;
 			}
 			else
 			{
-				return Vec3(0, 0, 0);
+				return emitted;
 			}
 		}
 		else
 		{
-			Vec3 unit_dir = unit_vector(r.direction());
+			/*Vec3 unit_dir = unit_vector(r.direction());
 			float t = 0.5 * (unit_dir.y() + 1.0);
-			return (1.0 - t) * Vec3(1.0, 1.0, 1.0) + t * Vec3(0.5, 0.7, 1.0);
+			return (1.0 - t) * Vec3(1.0, 1.0, 1.0) + t * Vec3(0.5, 0.7, 1.0);*/
+			return Vec3(0, 0, 0);
 		}
 	}
 }

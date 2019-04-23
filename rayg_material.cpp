@@ -18,6 +18,15 @@ namespace ray_g {
 	}
 
 	//-------------
+	// Base Class
+	//-------------
+
+	Vec3 Material::emittted(float u, float v, const Vec3 & p) const
+	{
+		return Vec3(0,0,0);
+	}
+
+	//-------------
 	// Lambertian
 	//-------------
 
@@ -105,5 +114,18 @@ namespace ray_g {
 			scattered = Ray(data.p, refracted);
 		}
 		return true;
+	}
+	
+	//-------------
+	//Diffuse Light
+	//-------------
+
+	DiffuseLight::~DiffuseLight()
+	{
+	}
+	
+	Vec3 DiffuseLight::emittted(float u, float v, const Vec3& p) const
+	{
+		return m_emit->value(u, v, p);
 	}
 }

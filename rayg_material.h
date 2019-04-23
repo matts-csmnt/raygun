@@ -15,6 +15,7 @@ namespace ray_g {
 	public:
 		virtual ~Material() {};
 		virtual bool scatter(const Ray& in, const hit_data& data, Vec3& attenuation, Ray& scattered) const = 0;
+		virtual Vec3 emittted(float u, float v, const Vec3& p) const;
 	};
 
 	//---------------------
@@ -52,5 +53,18 @@ namespace ray_g {
 		Dielectric(float ri) : m_refIdx(ri) {}
 		bool scatter(const Ray& in, const hit_data& data, Vec3& attenuation, Ray& scattered) const;
 		float m_refIdx;
+	};
+
+	//-------------
+	//Diffuse Light
+	//-------------
+
+	class DiffuseLight : public Material {
+	public:
+		DiffuseLight(Texture* a) : m_emit(a) {}
+		~DiffuseLight();
+		virtual bool scatter(const Ray& in, const hit_data& data, Vec3& attenuation, Ray& scattered) const { return false; }
+		virtual Vec3 emittted(float u, float v, const Vec3& p) const;
+		Texture* m_emit;
 	};
 }
