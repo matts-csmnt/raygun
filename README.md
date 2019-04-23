@@ -8,7 +8,7 @@ Following Pete Shirley's books for now.
 Maybe in the future I'll get triangle-based scenes going...
 
 #### Libraries Used:
-- [STB Image Write](https://github.com/nothings/stb)
+- [STB Image & Image Write](https://github.com/nothings/stb)
 
 #### Progress:
 - [x] Ray Tracing in One Weekend
