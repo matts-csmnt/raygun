@@ -16,6 +16,9 @@ namespace ray_g {
 			float t0, float t1);
 		Ray getRay(float s, float t);
 
+		float getTime0() const { return m_time0; };
+		float getTime1() const { return m_time1; };
+
 	private:
 		Vec3 m_lowerLeftCrnr;
 		Vec3 m_horizontalUnits;

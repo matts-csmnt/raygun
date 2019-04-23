@@ -31,6 +31,9 @@
     <Filter Include="Header Files\Core">
       <UniqueIdentifier>{22e84e9c-9c3f-4668-b582-43d180651138}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{c458450a-1b85-47ef-9ee0-dbb3c76d3e00}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Libraries\stb\stb_image.h">
@@ -78,6 +81,9 @@
     <ClInclude Include="rayg_aabb.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="rayg_renderer.h">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -114,6 +120,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rayg_scenes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_renderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

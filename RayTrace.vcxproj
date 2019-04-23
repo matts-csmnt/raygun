@@ -122,6 +122,7 @@
     <ClInclude Include="rayg_camera.h" />
     <ClInclude Include="rayg_material.h" />
     <ClInclude Include="rayg_perlin.h" />
+    <ClInclude Include="rayg_renderer.h" />
     <ClInclude Include="rayg_scenes.h" />
     <ClInclude Include="rayg_sphere.h" />
     <ClInclude Include="Libraries\stb\stb_image.h" />
@@ -140,6 +141,7 @@
     <ClCompile Include="rayg_camera.cpp" />
     <ClCompile Include="rayg_material.cpp" />
     <ClCompile Include="rayg_perlin.cpp" />
+    <ClCompile Include="rayg_renderer.cpp" />
     <ClCompile Include="rayg_scenes.cpp" />
     <ClCompile Include="rayg_sphere.cpp" />
     <ClCompile Include="rayg_surface.cpp" />
