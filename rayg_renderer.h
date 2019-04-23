@@ -26,8 +26,8 @@ namespace ray_g {
 		int SetScene(SurfaceList* scene);
 		int SetImageOutput(const char* filepath);
 
-		int Draw(int aa);
-		int Draw(SurfaceList* scene, int aa);
+		int Draw(int aa = 25);
+		int Draw(SurfaceList* scene, int aa = 25);
 
 	private:
 		int m_pxWidth;

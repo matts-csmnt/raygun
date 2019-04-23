@@ -7,6 +7,10 @@
 #include "common_defines.h"
 #include "randf.h"
 
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#define STBI_MSC_SECURE_CRT
+#include "Libraries/stb/stb_image_write.h"
+
 namespace ray_g {
 	
 	//--------------
@@ -108,10 +112,20 @@ namespace ray_g {
 					pixels[idx][2] = ib;
 				}
 			}
+
+			//output
+			stbi_flip_vertically_on_write(1);
+			//stbi_write_png("raytrace_output.png", k_px_width, k_px_height, 4, &pixels, sizeof(RGBA_Channels)*k_px_width);
+			stbi_write_bmp("raytrace_output.bmp", m_pxWidth, m_pxHeight, 3, *pixels);
+
+			SAFE_DELETE(pixels);
+
+			m_bvh->cleanup();
+			//world.cleanup(); -- tree cleans up surfaces...
 		}
 	}
 
-	int Renderer::Draw(SurfaceList* scene, int aa = 25)
+	int Renderer::Draw(SurfaceList* scene, int aa)
 	{
 		SetScene(scene);
 		Draw(aa);
