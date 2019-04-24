@@ -132,6 +132,7 @@
     <ClInclude Include="rayg_ray.h" />
     <ClInclude Include="rayg_surface.h" />
     <ClInclude Include="rayg_texture.h" />
+    <ClInclude Include="rayg_triangle.h" />
     <ClInclude Include="rayg_vec3.h" />
     <ClInclude Include="rayg_rects.h" />
   </ItemGroup>
@@ -152,6 +153,7 @@
     <ClCompile Include="rayg_surface.cpp" />
     <ClCompile Include="rayg_texture.cpp" />
     <ClCompile Include="rayg_rects.cpp" />
+    <ClCompile Include="rayg_triangle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

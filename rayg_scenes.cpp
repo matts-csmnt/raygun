@@ -3,6 +3,7 @@
 #include "rayg_sphere.h"
 #include "rayg_rects.h"
 #include "rayg_box.h"
+#include "rayg_triangle.h"
 
 #include "randf.h"
 
@@ -93,6 +94,9 @@ namespace ray_g{
 
 		sl.add(new Box(Vec3(130, 0, 65), Vec3(295, 165, 230), white));
 		sl.add(new Box(Vec3(265, 0, 295), Vec3(430, 330, 460), white));
+		sl.add(new FlipNormals(new Triangle(
+			Vec3(10, 250, 265), Vec3(255, 525, 265), Vec3(440, 250, 265), new Dielectric(1)
+		)));
 
 		return sl;
 	}

@@ -142,6 +142,7 @@ namespace ray_g {
 	{
 		SetScene(scene);
 		Draw(aa);
+		return 1;
 	}
 
 	bool Renderer::checkMembers()
