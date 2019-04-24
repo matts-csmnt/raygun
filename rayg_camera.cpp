@@ -27,7 +27,7 @@ namespace ray_g {
 		m_time1 = t1;
 
 		m_lensRad = aperture / 2;
-		m_aspect = (sWidth / sHeight);
+		m_aspect = float(sWidth) / float(sHeight);
 
 		//field of view
 		float theta = degToRad(fovy);

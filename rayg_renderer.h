@@ -8,6 +8,7 @@ namespace ray_g {
 	class Surface;
 	class BVHNode;
 	class Camera;
+	class Background;
 
 	using RGBA_Channels = unsigned char[3];
 
@@ -25,6 +26,7 @@ namespace ray_g {
 			float fovy, float aperture, float focusDist, float time0, float time1);
 		int SetScene(SurfaceList* scene);
 		int SetImageOutput(const char* filepath);
+		int SetBackground(Background* bg);
 
 		int Draw(int aa = 25);
 		int Draw(SurfaceList* scene, int aa = 25);
@@ -38,6 +40,7 @@ namespace ray_g {
 		SurfaceList* m_scene;
 		BVHNode* m_bvh;
 		Camera* m_camera;
+		Background* m_bg;
 
 		bool checkMembers();
 		Vec3 colour(const Ray& r, Surface* world, int depth);

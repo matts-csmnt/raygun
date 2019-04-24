@@ -3,6 +3,7 @@
 #include "rayg_bvh.h"
 #include "rayg_surface.h"
 #include "rayg_material.h"
+#include "rayg_background.h"
 
 #include "common_defines.h"
 #include "randf.h"
@@ -55,6 +56,18 @@ namespace ray_g {
 		else
 		{
 			printf("failed to set output filename. \n");
+			return 0;
+		}
+	}
+
+	int Renderer::SetBackground(Background * bg)
+	{
+		m_bg = bg;
+		if (m_bg)
+			return 1;
+		else
+		{
+			printf("failed to set background. \n");
 			return 0;
 		}
 	}
@@ -159,10 +172,10 @@ namespace ray_g {
 		}
 		else
 		{
-			/*Vec3 unit_dir = unit_vector(r.direction());
-			float t = 0.5 * (unit_dir.y() + 1.0);
-			return (1.0 - t) * Vec3(1.0, 1.0, 1.0) + t * Vec3(0.5, 0.7, 1.0);*/
-			return Vec3(0, 0, 0);
+			if (m_bg)
+				return m_bg->getColour(r);
+			else
+				return Vec3(0, 0, 0);
 		}
 	}
 }

@@ -87,6 +87,12 @@
     <ClInclude Include="rayg_rects.h">
       <Filter>Header Files\Surface Objects</Filter>
     </ClInclude>
+    <ClInclude Include="rayg_box.h">
+      <Filter>Header Files\Surface Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="rayg_background.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -129,6 +135,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rayg_rects.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_box.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_background.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

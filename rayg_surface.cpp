@@ -81,6 +81,7 @@ namespace ray_g {
 	void FlipNormals::cleanup()
 	{
 		m_ptr->cleanup();
+		SAFE_DELETE(m_ptr);
 	}
 	
 	bool FlipNormals::boundingBox(float t0, float t1, AABB & bb) const

@@ -118,6 +118,8 @@
     <ClInclude Include="common_defines.h" />
     <ClInclude Include="randf.h" />
     <ClInclude Include="rayg_aabb.h" />
+    <ClInclude Include="rayg_background.h" />
+    <ClInclude Include="rayg_box.h" />
     <ClInclude Include="rayg_bvh.h" />
     <ClInclude Include="rayg_camera.h" />
     <ClInclude Include="rayg_material.h" />
@@ -138,6 +140,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="randf.cpp" />
     <ClCompile Include="rayg_aabb.cpp" />
+    <ClCompile Include="rayg_background.cpp" />
+    <ClCompile Include="rayg_box.cpp" />
     <ClCompile Include="rayg_bvh.cpp" />
     <ClCompile Include="rayg_camera.cpp" />
     <ClCompile Include="rayg_material.cpp" />

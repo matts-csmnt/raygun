@@ -2,6 +2,7 @@
 #include "rayg_material.h"
 #include "rayg_sphere.h"
 #include "rayg_rects.h"
+#include "rayg_box.h"
 
 #include "randf.h"
 
@@ -86,9 +87,13 @@ namespace ray_g{
 		sl.add(new FlipNormals(new YZRect(0,555,0,555,555,green)));
 		sl.add(new YZRect(0, 555, 0, 555, 0, red));
 		sl.add(new XZRect(213, 343, 227, 332, 554, light));
-		sl.add(new FlipNormals(new XYRect(0, 555, 0, 555, 555, white)));
+		sl.add(new FlipNormals(new XZRect(0, 555, 0, 555, 555, white)));
 		sl.add(new XZRect(0, 555, 0, 555, 0, white));
 		sl.add(new FlipNormals(new XYRect(0, 555, 0, 555, 555, white)));
+
+		sl.add(new Box(Vec3(130, 0, 65), Vec3(295, 165, 230), white));
+		sl.add(new Box(Vec3(265, 0, 295), Vec3(430, 330, 460), white));
+
 		return sl;
 	}
 }
