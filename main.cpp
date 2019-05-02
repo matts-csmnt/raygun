@@ -16,7 +16,7 @@
 
 constexpr int k_px_width = 1200;
 constexpr int k_px_height = 600;
-constexpr int k_num_aa_samples = 50;
+constexpr int k_num_aa_samples = 100;
 static const ray_g::Vec3 kUpVec = ray_g::Vec3( 0, 1, 0 );
 
 using namespace ray_g;
@@ -24,7 +24,7 @@ using namespace ray_g;
 int main()
 {
 	//World List
-	SurfaceList world = CornellBox();	//TwoPerlinSpheres();	//RandomScene();
+	SurfaceList world = CornellSmoke();
 
 	//Add textured sphere
 	//int nx, ny, nn;

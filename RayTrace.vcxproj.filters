@@ -96,6 +96,12 @@
     <ClInclude Include="rayg_triangle.h">
       <Filter>Header Files\Surface Objects</Filter>
     </ClInclude>
+    <ClInclude Include="rayg_constant_med.h">
+      <Filter>Header Files\Surface Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="rayg_translate.h">
+      <Filter>Header Files\Surface Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -147,6 +153,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rayg_triangle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_constant_med.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_translate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

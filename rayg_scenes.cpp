@@ -4,7 +4,7 @@
 #include "rayg_rects.h"
 #include "rayg_box.h"
 #include "rayg_triangle.h"
-
+#include "rayg_constant_med.h"
 #include "randf.h"
 
 namespace ray_g{
@@ -94,9 +94,32 @@ namespace ray_g{
 
 		sl.add(new Box(Vec3(130, 0, 65), Vec3(295, 165, 230), white));
 		sl.add(new Box(Vec3(265, 0, 295), Vec3(430, 330, 460), white));
-		sl.add(new FlipNormals(new Triangle(
-			Vec3(10, 250, 265), Vec3(255, 525, 265), Vec3(440, 250, 265), new Dielectric(1)
-		)));
+		/*sl.add(new FlipNormals(new Triangle(
+			Vec3(10, 250, 265), Vec3(255, 525, 265), Vec3(440, 250, 265), red
+		)));*/
+
+		return sl;
+	}
+
+	SurfaceList CornellSmoke()
+	{
+		SurfaceList sl;
+		Material* white = new Lambertian(new ConstantTexture(Vec3(0.73)));
+		Material* red = new Lambertian(new ConstantTexture(Vec3(0.65, 0.05, 0.05)));
+		Material* green = new Lambertian(new ConstantTexture(Vec3(0.12, 0.45, 0.15)));
+		Material* light = new DiffuseLight(new ConstantTexture(Vec3(7)));
+
+		sl.add(new FlipNormals(new YZRect(0, 555, 0, 555, 555, green)));
+		sl.add(new YZRect(0, 555, 0, 555, 0, red));
+		sl.add(new XZRect(213, 343, 227, 332, 554, light));
+		sl.add(new FlipNormals(new XZRect(0, 555, 0, 555, 555, white)));
+		sl.add(new XZRect(0, 555, 0, 555, 0, white));
+		sl.add(new FlipNormals(new XYRect(0, 555, 0, 555, 555, white)));
+
+		Surface* b1 = new Box(Vec3(265, 0, 295), Vec3(430, 330, 460), white);
+		Surface* b2 = new Box(Vec3(130, 0, 65), Vec3(295, 165, 230), white);
+		sl.add(new ConstantMedium(b1, 0.01, new ConstantTexture(Vec3(0))));
+		sl.add(new ConstantMedium(b2, 0.01, new ConstantTexture(Vec3(1))));
 
 		return sl;
 	}

@@ -128,4 +128,19 @@ namespace ray_g {
 	{
 		return m_emit->value(u, v, p);
 	}
+
+	//-------------
+	//Isotropic Vol
+	//-------------
+
+	Isotropic::~Isotropic()
+	{
+	}
+
+	bool Isotropic::scatter(const Ray & in, const hit_data & data, Vec3 & attenuation, Ray & scattered) const
+	{
+		scattered = Ray(data.p, random_in_unit_sphere());
+		attenuation = m_albedo->value(data.u, data.v, data.p);
+		return true;
+	}
 }

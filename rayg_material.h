@@ -67,4 +67,16 @@ namespace ray_g {
 		virtual Vec3 emittted(float u, float v, const Vec3& p) const;
 		Texture* m_emit;
 	};
+
+	//-------------
+	//Isotropic Vol
+	//-------------
+
+	class Isotropic : public Material {
+	public:
+		Isotropic(Texture* a) : m_albedo(a) {}
+		~Isotropic();
+		virtual bool scatter(const Ray& in, const hit_data& data, Vec3& attenuation, Ray& scattered) const;
+		Texture* m_albedo;
+	};
 }
