@@ -14,6 +14,11 @@ namespace ray_g {
 		virtual bool hit(const Ray& r, float t_min, float t_max, hit_data& data) const;
 		virtual void cleanup();
 		virtual bool boundingBox(float t0, float t1, AABB& bb) const;
+
+		void setP0(const Vec3& v);
+		void setP1(const Vec3& v);
+		void setP2(const Vec3& v);
+
 	private:
 		Vec3 m_p0, m_p1, m_p2;
 		Material* m_material;

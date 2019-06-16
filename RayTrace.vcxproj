@@ -116,6 +116,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="common_defines.h" />
+    <ClInclude Include="Libraries\tinyobjloader\tiny_obj_loader.h" />
     <ClInclude Include="randf.h" />
     <ClInclude Include="rayg_aabb.h" />
     <ClInclude Include="rayg_background.h" />
@@ -134,6 +135,7 @@
     <ClInclude Include="rayg_texture.h" />
     <ClInclude Include="rayg_translate.h" />
     <ClInclude Include="rayg_triangle.h" />
+    <ClInclude Include="rayg_tri_mesh.h" />
     <ClInclude Include="rayg_vec3.h" />
     <ClInclude Include="rayg_rects.h" />
     <ClInclude Include="rayg_constant_med.h" />
@@ -158,6 +160,7 @@
     <ClCompile Include="rayg_rects.cpp" />
     <ClCompile Include="rayg_translate.cpp" />
     <ClCompile Include="rayg_triangle.cpp" />
+    <ClCompile Include="rayg_tri_mesh.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

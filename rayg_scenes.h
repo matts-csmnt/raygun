@@ -20,4 +20,6 @@ namespace ray_g {
 	SurfaceList TwoPerlinSpheres();
 	SurfaceList CornellBox();
 	SurfaceList CornellSmoke();
+
+	SurfaceList BunnyObjTest();
 }

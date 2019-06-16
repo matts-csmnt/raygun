@@ -90,4 +90,17 @@ namespace ray_g {
 		bb = AABB(Vec3(xmin,ymin,zmin), Vec3(xmax,ymax,zmax));
 		return true;
 	}
+
+	void Triangle::setP0(const Vec3 & v)
+	{
+		m_p0 = v;
+	}
+	void Triangle::setP1(const Vec3 & v)
+	{
+		m_p1 = v;
+	}
+	void Triangle::setP2(const Vec3 & v)
+	{
+		m_p2 = v;
+	}
 }

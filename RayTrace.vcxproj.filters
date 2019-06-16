@@ -102,6 +102,12 @@
     <ClInclude Include="rayg_translate.h">
       <Filter>Header Files\Surface Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Libraries\tinyobjloader\tiny_obj_loader.h">
+      <Filter>Libraries</Filter>
+    </ClInclude>
+    <ClInclude Include="rayg_tri_mesh.h">
+      <Filter>Header Files\Surface Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -159,6 +165,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="rayg_translate.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rayg_tri_mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

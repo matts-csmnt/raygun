@@ -5,6 +5,7 @@
 #include "rayg_box.h"
 #include "rayg_triangle.h"
 #include "rayg_constant_med.h"
+#include "rayg_tri_mesh.h"
 #include "randf.h"
 
 namespace ray_g{
@@ -120,6 +121,29 @@ namespace ray_g{
 		Surface* b2 = new Box(Vec3(130, 0, 65), Vec3(295, 165, 230), white);
 		sl.add(new ConstantMedium(b1, 0.01, new ConstantTexture(Vec3(0))));
 		sl.add(new ConstantMedium(b2, 0.01, new ConstantTexture(Vec3(1))));
+
+		return sl;
+	}
+
+	SurfaceList BunnyObjTest()
+	{
+		SurfaceList sl;
+
+		Material* light = new DiffuseLight(new ConstantTexture(Vec3(15)));
+
+		//floor
+		sl.add(new Sphere(Vec3(0, -1000, 0), 1000,
+			new Lambertian(new CheckerTexture(
+				new ConstantTexture(Vec3(0.2, 0.3, 0.1)),
+				new ConstantTexture(Vec3(0.9))
+			))));
+
+		//Bunny
+		sl.add(new TriangleMesh(
+			Vec3(0,1,0),
+			new Lambertian(new ConstantTexture(Vec3(randf()*randf(), randf()*randf(), randf()*randf()))),
+			//"Media/Models/unit_sphere.obj"));
+			"Media/Models/bunny.obj"));
 
 		return sl;
 	}
